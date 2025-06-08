@@ -33,16 +33,8 @@
 			isa = PBXGroup;
 			children = (
 				6454819E2DF55F8300CCA67D /* Income */,
-				6454819D2DF55F8300CCA67D /* Products */,
-			);
-			sourceTree = "<group>";
-		};
-		6454819D2DF55F8300CCA67D /* Products */ = {
-			isa = PBXGroup;
-			children = (
 				6454819C2DF55F8300CCA67D /* Income.app */,
 			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -95,7 +87,7 @@
 			mainGroup = 645481932DF55F8300CCA67D;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 6454819D2DF55F8300CCA67D /* Products */;
+			productRefGroup = 645481932DF55F8300CCA67D;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
