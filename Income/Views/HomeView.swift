@@ -10,14 +10,35 @@ import SwiftUI
 struct HomeView: View {
     
     @State private var transactions: [Transaction] = [
-        Transaction(title: "Apple", type:.expense,amount:5.959,date: Date()),
-        Transaction(title: "Apple", type:.expense, amount:5.959,date: Date())
     ]
+    @State private var showAddTransactionView: Bool = false
+    @State private var transactionToEdit: Transaction?
+    private  var expense: String{
+        let sumExpenses = transactions.filter({ $0.type == .expense }).reduce(0,{$0 + $1.amount })
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .currency
+        return numberFormatter.string(from: sumExpenses as NSNumber) ?? "$0.00"
+    }
+    private var income: String{
+        let sumIncome = transactions.filter({ $0.type == .income }).reduce(0,{$0 + $1.amount })
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .currency
+        return numberFormatter.string(from: sumIncome as NSNumber) ?? "$0.00"
+    }
+    private var total: String {
+        let sumExpenses = transactions.filter({ $0.type == .expense }).reduce(0,{$0 + $1.amount })
+        let sumIncome = transactions.filter({ $0.type == .income }).reduce(0,{$0 + $1.amount })
+        let  total = sumIncome - sumExpenses
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .currency
+        return numberFormatter.string(from: total as NSNumber) ?? "$0.00"
+    }
+    @State private var Balance: Double = 0
     fileprivate func FloatingBUtton() -> some View {
         VStack{
             Spacer()
             NavigationLink{
-                AddTransactionView()
+                AddTransactionView(transactions: $transactions)
             } label: {
                 Text("+")
                     .font(.largeTitle)
@@ -35,11 +56,11 @@ struct HomeView: View {
                 .fill(Color.primaryLightGreen)
             VStack(alignment: .leading,spacing:12){
                 HStack{
-                    VStack {
+                    VStack(alignment: .leading) {
                         Text("BALANCE")
                             .font(.caption)
                             .foregroundColor(.white)
-                        Text("$2")
+                        Text("\(total)")
                             .font(.system(size: 42,weight: .light))
                             .foregroundStyle(.white)
                     }
@@ -52,7 +73,7 @@ struct HomeView: View {
                         Text("Expense")
                             .font(.system(size:15,weight: .semibold))
                             .foregroundStyle(Color.white)
-                        Text("$20")
+                        Text("\(expense)")
                             .font(.system(size:15, weight:.semibold))
                             .foregroundStyle(Color.white)
                     }
@@ -60,7 +81,7 @@ struct HomeView: View {
                         Text("Income")
                             .font(.system(size:15,weight: .semibold))
                             .foregroundStyle(Color.white)
-                        Text("$22")
+                        Text("\(income)")
                             .font(.system(size:15, weight:.semibold))
                             .foregroundStyle(Color.white)
                     }
@@ -82,14 +103,27 @@ struct HomeView: View {
                     BalanceView()
                     List{
                         ForEach(transactions) { transaction in
-                            TransactionView(transaction: transaction)
+                            Button(action: {
+                                transactionToEdit = transaction
+                            }, label: {
+                                TransactionView(transaction: transaction)
+                                    .foregroundStyle(.black)
+                            })
                         }
+                        .onDelete(perform: delete)
                     }
                     .scrollContentBackground(.hidden)
                 }
                 FloatingBUtton()
             }
             .navigationTitle("Income")
+            .navigationDestination(item: $transactionToEdit, destination: {
+                transactionToEdit in
+                AddTransactionView(transactionToEdit: transactionToEdit, transactions: $transactions)
+            })
+            .navigationDestination(isPresented: $showAddTransactionView,destination: {
+                AddTransactionView(transactions: $transactions)
+            })
             .toolbar{
                 ToolbarItem(placement: .topBarTrailing){
                     Button(action: {
@@ -101,6 +135,9 @@ struct HomeView: View {
                 }
             }
         }
+    }
+    private func delete(at offsets: IndexSet){
+        transactions.remove(atOffsets: offsets)
     }
 }
 #Preview {
