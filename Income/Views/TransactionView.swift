@@ -9,7 +9,9 @@ import Foundation
 import SwiftUI
 
 struct TransactionView: View {
+      
     let transaction: Transaction
+    @AppStorage("currency") private var currency: Currency = .inr
     var body: some View {
         VStack {
             HStack{
@@ -31,6 +33,7 @@ struct TransactionView: View {
                         Text(transaction.title)
                             .font(.system(size:15,weight: .bold))
                         Spacer()
+                        Text(String(transaction.displayAmount(currency: currency)))
                         Text(String(format:"%.2f",transaction.amount))
                             .font(.system(size:15,weight: .bold))
                     }

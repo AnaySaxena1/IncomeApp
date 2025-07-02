@@ -1,4 +1,3 @@
-//
 //  HomeView.swift
 //  Income
 //
@@ -9,20 +8,33 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @State private var transactions: [Transaction] = [
-    ]
+    @State private var transactions: [Transaction] = []
     @State private var showAddTransactionView: Bool = false
     @State private var transactionToEdit: Transaction?
+    @State private var showSettings = false
+    
+    @AppStorage("orderDescending") var orderDescending = false  // var inside app storage and normal variable should match
+    @AppStorage("currency") var currency: Currency = .inr
+    @AppStorage("FilterMinimum") private var filterMinium = 0.0
+    private var displayTransaction: [Transaction] {
+        let sortedTransactions = orderDescending ? transactions.sorted(by: { $0.date < $1.date})
+        : transactions.sorted(by: {$0.date > $1.date })
+        let filterTransactions = sortedTransactions.filter({$0.amount >= filterMinium   })
+        return filterTransactions 
+    }
+    
     private  var expense: String{
         let sumExpenses = transactions.filter({ $0.type == .expense }).reduce(0,{$0 + $1.amount })
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .currency
+        numberFormatter.locale = currency.locale
         return numberFormatter.string(from: sumExpenses as NSNumber) ?? "$0.00"
     }
     private var income: String{
         let sumIncome = transactions.filter({ $0.type == .income }).reduce(0,{$0 + $1.amount })
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .currency
+        numberFormatter.locale = currency.locale
         return numberFormatter.string(from: sumIncome as NSNumber) ?? "$0.00"
     }
     private var total: String {
@@ -30,6 +42,7 @@ struct HomeView: View {
         let sumIncome = transactions.filter({ $0.type == .income }).reduce(0,{$0 + $1.amount })
         let  total = sumIncome - sumExpenses
         let numberFormatter = NumberFormatter()
+        numberFormatter.locale = currency.locale
         numberFormatter.numberStyle = .currency
         return numberFormatter.string(from: total as NSNumber) ?? "$0.00"
     }
@@ -102,7 +115,7 @@ struct HomeView: View {
                 VStack {
                     BalanceView()
                     List{
-                        ForEach(transactions) { transaction in
+                        ForEach(displayTransaction ) { transaction in
                             Button(action: {
                                 transactionToEdit = transaction
                             }, label: {
@@ -124,10 +137,13 @@ struct HomeView: View {
             .navigationDestination(isPresented: $showAddTransactionView,destination: {
                 AddTransactionView(transactions: $transactions)
             })
+            .sheet(isPresented: $showSettings, content: {
+                SettingsView()
+            })
             .toolbar{
                 ToolbarItem(placement: .topBarTrailing){
                     Button(action: {
-                        
+                        showSettings = true
                     },label: {
                         Image(systemName: "gearshape.fill")
                     })

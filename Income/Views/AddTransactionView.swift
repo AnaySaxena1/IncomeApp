@@ -17,10 +17,12 @@ struct AddTransactionView: View {
     var transactionToEdit: Transaction?
     @Binding var transactions: [Transaction]
     @Environment(\.dismiss) var dismiss
+    @AppStorage("currency") private var currency: Currency = .inr
     
     var numberFormatter: NumberFormatter{
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .currency
+        numberFormatter.locale = currency.locale
         return numberFormatter
     }
         
@@ -36,7 +38,7 @@ struct AddTransactionView: View {
                 .padding(.horizontal,30)
             Picker("Choose Transaction Type", selection: $selectedTransactionType) {
                 ForEach(TransactionType.allCases) { transactionType in
-                    Text(transactionType.title)
+                    Text(transactionType.title) 
                         .tag(transactionType)
                 }
             }
