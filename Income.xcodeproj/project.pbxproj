@@ -6,8 +6,19 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		6490A82F2E159340006323D1 /* IncomeData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6490A82D2E159340006323D1 /* IncomeData.xcdatamodeld */; };
+		6490A8322E159618006323D1 /* TransactionItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6490A8302E159618006323D1 /* TransactionItem+CoreDataClass.swift */; };
+		6490A8332E159618006323D1 /* TransactionItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6490A8312E159618006323D1 /* TransactionItem+CoreDataProperties.swift */; };
+		6490A8352E159A9E006323D1 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6490A8342E159A9E006323D1 /* DataManager.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		6454819C2DF55F8300CCA67D /* Income.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Income.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6490A82E2E159340006323D1 /* IncomeData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IncomeData.xcdatamodel; sourceTree = "<group>"; };
+		6490A8302E159618006323D1 /* TransactionItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionItem+CoreDataClass.swift"; sourceTree = "<group>"; };
+		6490A8312E159618006323D1 /* TransactionItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		6490A8342E159A9E006323D1 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -32,9 +43,21 @@
 		645481932DF55F8300CCA67D = {
 			isa = PBXGroup;
 			children = (
+				6490A8292E1592DF006323D1 /* Data */,
 				6454819E2DF55F8300CCA67D /* Income */,
 				6454819C2DF55F8300CCA67D /* Income.app */,
 			);
+			sourceTree = "<group>";
+		};
+		6490A8292E1592DF006323D1 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				6490A82D2E159340006323D1 /* IncomeData.xcdatamodeld */,
+				6490A8302E159618006323D1 /* TransactionItem+CoreDataClass.swift */,
+				6490A8312E159618006323D1 /* TransactionItem+CoreDataProperties.swift */,
+				6490A8342E159A9E006323D1 /* DataManager.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -111,6 +134,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6490A8352E159A9E006323D1 /* DataManager.swift in Sources */,
+				6490A82F2E159340006323D1 /* IncomeData.xcdatamodeld in Sources */,
+				6490A8322E159618006323D1 /* TransactionItem+CoreDataClass.swift in Sources */,
+				6490A8332E159618006323D1 /* TransactionItem+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,6 +339,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6490A82D2E159340006323D1 /* IncomeData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6490A82E2E159340006323D1 /* IncomeData.xcdatamodel */,
+			);
+			currentVersion = 6490A82E2E159340006323D1 /* IncomeData.xcdatamodel */;
+			path = IncomeData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 645481942DF55F8300CCA67D /* Project object */;
 }
