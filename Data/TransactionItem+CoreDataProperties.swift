@@ -18,7 +18,7 @@ extension TransactionItem {
 
     @NSManaged public var id: UUID?
     @NSManaged public var title: String?
-    @NSManaged public var type: Int16
+    @NSManaged public var type: Int
     @NSManaged public var amount: Double
     @NSManaged public var date: Date?
 
@@ -42,9 +42,9 @@ extension TransactionItem{
     }
     
     var wrappedTransactionType: TransactionType {
-        return TransactionType(rawValue: Int(type)) ?? .expense
+        return TransactionType(rawValue: (type)) ?? .expense
     }
-    
+
     var wrappedAmount: Double {
         return amount
     }

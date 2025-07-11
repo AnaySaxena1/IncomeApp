@@ -37,7 +37,7 @@ struct HomeView: View {
     
     @AppStorage("orderDescending") var orderDescending = false
     @AppStorage("filterMinimum") var filterMinimum = 0.0
-    @AppStorage("currency") var currency = Currency.usd
+    @AppStorage("currency") var currency = Currency.inr
     
     private var numberFormatter: NumberFormatter {
         let numberFormatter = NumberFormatter()

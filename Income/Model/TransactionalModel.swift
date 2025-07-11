@@ -16,7 +16,7 @@ import SwiftData
 
 @Model class TransactionModel {
     
-    var id: UUID
+    var  id: UUID
     var title: String
     var type: TransactionType
     var amount: Double
@@ -74,9 +74,7 @@ extension Transaction: Hashable {
         lhs.id == rhs.id
     }
     
-    
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
-    
 }

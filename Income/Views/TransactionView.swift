@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TransactionView: View {
     let transaction: TransactionModel
-    @AppStorage("currency") var currency = Currency.usd
+    @AppStorage("currency") var currency = Currency.inr
     
     var body: some View {
         VStack {

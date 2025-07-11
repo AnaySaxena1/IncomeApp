@@ -18,7 +18,7 @@ struct AddTransactionView: View {
     var transactionToEdit: TransactionModel?
     @Environment(\.dismiss) var dismiss
     @Environment(\.modelContext) private var context
-    @AppStorage("currency") var currency = Currency.usd
+    @AppStorage("currency") var currency = Currency.inr
     
     var numberFormatter: NumberFormatter {
         let numberFormatter = NumberFormatter()

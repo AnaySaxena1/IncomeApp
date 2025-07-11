@@ -7,8 +7,8 @@
 
 import Foundation
 
-enum TransactionType: String, CaseIterable, Identifiable, Codable {
-    case income, expense
+enum TransactionType: Int, CaseIterable, Identifiable, Codable {
+    case income = 0 , expense
     var id: Self { self }
     
     var title: String {
